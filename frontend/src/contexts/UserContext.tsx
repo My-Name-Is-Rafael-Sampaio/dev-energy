@@ -1,6 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
 
-// São variáveis do usuário.
 type UserContextType = {
   isLoggedIn: boolean | null;
   token: string | null;
@@ -37,7 +36,6 @@ type UserContextProviderProps = {
 
 const UserContext = createContext<UserContextType>(initialValue);
 
-// Iniciando as variáveis com os valores padrões.
 const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(
     initialValue.isLoggedIn

@@ -1,30 +1,31 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Função responsável por armazenar dados no AsyncStorage.
 const storeData = async (key: string, value: any): Promise<void> => {
   try {
-    await AsyncStorage.setItem(key, value);
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
   } catch (error) {
-    throw error;
+    throw new Error("Error: Ocorreu um erro ao armazenar os dados.");
   }
 };
 
-// Função responsável por recuperar dados no AsyncStorage.
-const recoverData = async (key: string): Promise<string | null> => {
+const recoverData = async (key: string): Promise<any | null> => {
   try {
     const data = await AsyncStorage.getItem(key);
-    return data;
+    if (data !== null) {
+      return JSON.parse(data);
+    }
+    return null;
   } catch (error) {
-    throw error;
+    throw new Error("Error: Houve um erro ao recuperar os dados.");
   }
 };
 
-// Função responsável por deletar dados no AsyncStorage.
 const deleteData = async (key: string): Promise<void> => {
   try {
     await AsyncStorage.removeItem(key);
   } catch (error) {
-    throw error;
+    throw new Error("Error: Ocorreu um erro ao deletar os dados.");
   }
 };
 

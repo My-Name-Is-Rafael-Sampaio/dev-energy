@@ -1,6 +1,5 @@
 import React from "react";
 
-// Importa as variáveis realacionadas ao usuário.
 import { UserContextProvider } from "./UserContext";
 
 const providers = [UserContextProvider];

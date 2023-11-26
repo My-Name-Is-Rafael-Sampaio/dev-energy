@@ -1,18 +1,11 @@
 import React, { ComponentType, useContext, useState, useEffect } from "react";
-
-// Dependências que possibilitam a navegação.
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 
-// Componente de telas do menu lateral.
-import { CustomDrawer } from "../Main";
-
-// Componentes de telas do app.
+import CustomDrawer from "../custom-drawer/CustomDrawer";
 import { Logger, Login, Home } from "../../screens/Main";
-
 import { UserContext } from "../../contexts/Main";
-
 import { recoverData } from "../../util/Main";
 
 import {
@@ -20,8 +13,8 @@ import {
   drawerAuthorizedScreenOptions,
   stackScreenDrawerOptions,
   stackScreenAuthPagesOptions,
-  stackScreenLoginOptions,
   stackScreenLoggerOptions,
+  stackScreenLoginOptions,
   IconName,
 } from "../css/GlobalStyles";
 
@@ -42,14 +35,14 @@ const AuthPages = () => {
     <Stack.Navigator initialRouteName="login">
       <Stack.Group>
         <Stack.Screen
-          name="login"
-          component={Login}
-          options={stackScreenLoginOptions}
-        />
-        <Stack.Screen
           name="logger"
           component={Logger}
           options={stackScreenLoggerOptions}
+        />
+        <Stack.Screen
+          name="login"
+          component={Login}
+          options={stackScreenLoginOptions}
         />
       </Stack.Group>
     </Stack.Navigator>

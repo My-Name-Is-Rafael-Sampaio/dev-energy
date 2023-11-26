@@ -1,30 +1,24 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Alert, View, Pressable } from "react-native";
+import React, { useContext, useState } from "react";
+import { View } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 
-import { UserContext } from "../../contexts/Main";
-import { recoverData, deleteData } from "../../util/Main";
+import { Avatar, Text, Button } from "react-native-paper";
 
-import { Avatar, Button, Text, Dialog, Portal } from "react-native-paper";
+import { UserContext } from "../../contexts/Main";
 import { styles } from "../css/GlobalStyles";
 
 const CustomDrawer = (props) => {
-  const {
-    setIsLoggedIn,
-    token,
-    setToken,
-    userId,
-    setUserId,
-    setUserEmail,
-    userName,
-    setUserName,
-    setAvailableMenuOptions,
-  } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogoutButton = () => {
+    setIsLoading(true);
+    setIsLoggedIn(false);
+  };
 
   return (
     <DrawerContentScrollView {...props}>
@@ -39,7 +33,16 @@ const CustomDrawer = (props) => {
             </View>
           </View>
           <View style={styles[3]}>
-            <Text style={styles[5]}>{userName}</Text>
+            <Text
+              style={{
+                textAlign: "center",
+                fontSize: 15,
+                color: "#000000",
+                padding: 5,
+              }}
+            >
+              Nome do Usuário
+            </Text>
           </View>
         </View>
       </View>
@@ -52,9 +55,17 @@ const CustomDrawer = (props) => {
               loading={isLoading}
               icon={isLoading ? null : "logout"}
               mode="elevated"
+              buttonColor="#ff0000"
               labelStyle={{ color: "#ffffff" }}
-              style={styles[8]}
-              //   onPress={handleLogoutButton}
+              style={[
+                styles[5],
+                {
+                  width: 200,
+                  padding: 2,
+                  backgroundColor: !isLoading && "#ff0000",
+                },
+              ]}
+              onPress={handleLogoutButton}
             >
               {isLoading ? "Saindo..." : "Sair"}
             </Button>

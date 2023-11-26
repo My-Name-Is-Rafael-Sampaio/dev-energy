@@ -1,31 +1,16 @@
 import React, { useState, useContext } from "react";
-import {
-  View,
-  Image,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Alert,
-} from "react-native";
-
-import { UserContext } from "../../contexts/Main";
-import { storeData } from "../../util/Main";
+import { View, Image, Keyboard, TouchableWithoutFeedback } from "react-native";
 
 import { Text, TextInput, Button } from "react-native-paper";
+
 import { styles, inputTheme } from "../../components/Main";
+import { UserContext } from "../../contexts/Main";
 
 const Login = ({ navigation }) => {
-  const {
-    isLoggedIn,
-    setIsLoggedIn,
-    setToken,
-    setUserId,
-    setUserEmail,
-    setUserName,
-    setAvailableMenuOptions,
-  } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const dismissKeyboard = () => {
@@ -34,15 +19,13 @@ const Login = ({ navigation }) => {
 
   const handleLoginButton = async () => {
     dismissKeyboard();
+    setIsLoading(true);
+    setIsLoggedIn(true);
   };
 
   const handleLoggerButton = () => {
     navigation.navigate("authPages", { screen: "logger" });
   };
-
-  //   if (isLoggedIn === null) {
-  //     return <Loading />;
-  //   }
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -51,11 +34,20 @@ const Login = ({ navigation }) => {
           <View style={styles[3]}>
             <Image
               source={require("../../assets/logo.png")}
-              style={styles[12]}
+              style={{ width: 190, height: 70 }}
             />
           </View>
           <View style={styles[3]}>
-            <Text style={styles[13]}>Bem-vindo ao Pivete Energy</Text>
+            <Text
+              style={{
+                textAlign: "center",
+                fontSize: 15,
+                color: "#000000",
+                padding: 5,
+              }}
+            >
+              Bem-vindo ao Pivete Energy
+            </Text>
           </View>
         </View>
         <View style={styles[2]}>
@@ -63,10 +55,10 @@ const Login = ({ navigation }) => {
             <TextInput
               left={<TextInput.Icon icon="account-outline" />}
               label="Usuário"
-              style={styles[10]}
+              style={styles[4]}
               theme={inputTheme}
-              value={user}
-              onChangeText={(text) => setUser(text)}
+              value={userName}
+              onChangeText={(text) => setUserName(text)}
             />
           </View>
           <View style={styles[3]}>
@@ -74,7 +66,7 @@ const Login = ({ navigation }) => {
               left={<TextInput.Icon icon="lock-outline" />}
               label="Senha"
               secureTextEntry
-              style={styles[10]}
+              style={styles[4]}
               theme={inputTheme}
               value={password}
               onChangeText={(text) => setPassword(text)}
@@ -88,15 +80,19 @@ const Login = ({ navigation }) => {
               loading={isLoading}
               icon={isLoading ? null : "login"}
               mode="elevated"
+              buttonColor="#008037"
               labelStyle={{ color: "#ffffff" }}
-              style={styles[14]}
+              style={[styles[5], { backgroundColor: !isLoading && "#008037" }]}
               onPress={handleLoginButton}
             >
               {isLoading ? "Carregando..." : "Entrar"}
             </Button>
           </View>
           <View style={styles[3]}>
-            <Text style={styles[15]} onPress={handleLoggerButton}>
+            <Text
+              style={{ fontSize: 16, color: "#696969" }}
+              onPress={handleLoggerButton}
+            >
               Cadastre-se
             </Text>
           </View>
