@@ -19,23 +19,23 @@ const Home = ({ navigation }) => {
   const [cards, setCards] = useState<CardType[]>([
     {
       id: 1,
-      icon: "folder",
-      title: "Card Title",
-      subtitle: "Card Subtitle",
+      icon: "lightning-bolt-outline",
+      title: "Economia de Energia",
+      subtitle: "Maximize a Eficiência e Minimize o Consumo",
       image: "https://picsum.photos/700",
     },
     {
       id: 2,
-      icon: "folder",
-      title: "Card Title",
-      subtitle: "Card Subtitle",
+      icon: "cat",
+      title: "Gato de Luz (Roubo de Energia)",
+      subtitle: "Consequências e Riscos do Roubo de Eletricidade",
       image: "https://picsum.photos/700",
     },
     {
       id: 3,
-      icon: "folder",
-      title: "Card Title",
-      subtitle: "Card Subtitle",
+      icon: "sine-wave",
+      title: "Alternativas e Soluções Legais",
+      subtitle: "Para Dificuldades Financeiras",
       image: "https://picsum.photos/700",
     },
   ]);
@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
             key={index}
             style={{
               flexDirection: "column",
-              padding: 5,
+              padding: 20,
             }}
           >
             <Card mode="elevated">
@@ -62,7 +62,9 @@ const Home = ({ navigation }) => {
                 left={(props) => (
                   <LeftContent {...props} icon={cardItem.icon} />
                 )}
+                titleNumberOfLines={2}
                 title={cardItem.title}
+                subtitleNumberOfLines={2}
                 subtitle={cardItem.subtitle}
               />
               <Card.Content>
@@ -70,10 +72,6 @@ const Home = ({ navigation }) => {
                 <Text variant="bodyMedium">Card content</Text>
               </Card.Content>
               <Card.Cover source={{ uri: cardItem.image }} />
-              <Card.Actions>
-                <Button>Cancel</Button>
-                <Button>Ok</Button>
-              </Card.Actions>
             </Card>
           </View>
         ))}

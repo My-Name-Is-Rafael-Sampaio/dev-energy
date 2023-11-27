@@ -6,13 +6,37 @@ import { StackNavigationOptions } from "@react-navigation/stack";
 
 import { DefaultTheme } from "react-native-paper";
 
-// style do stack AuthPages
-const stackScreenAuthPagesOptions: StackNavigationOptions = {
-  headerShown: false,
+// style das páginas stack
+const stackScreenOptions: StackNavigationOptions = {
+  headerTintColor: "#ffffff",
+  headerTitleAlign: "center",
+  headerStyle: {
+    backgroundColor: "#008037",
+  },
+  headerTitleStyle: {
+    color: "#ffffff",
+    textAlign: "center",
+  },
 };
 
-// style do stack Drawer
-const stackScreenDrawerOptions: StackNavigationOptions = {
+// style da página Logger
+const stackScreenLoggerOptions = (): StackNavigationOptions => {
+  return {
+    ...stackScreenOptions,
+    title: "Cadastrar",
+  };
+};
+
+// style da página Login
+const stackScreenLoginOptions = (): StackNavigationOptions => {
+  return {
+    ...stackScreenOptions,
+    title: "Login",
+  };
+};
+
+// style do stack AuthPages
+const stackScreenAuthPagesOptions: StackNavigationOptions = {
   headerShown: false,
 };
 
@@ -66,45 +90,23 @@ const drawerAuthorizedScreenOptions = (page: {
   };
 };
 
-// style das páginas stack
-const stackScreenOptions: StackNavigationOptions = {
-  headerTintColor: "#ffffff",
-  headerTitleAlign: "center",
-  headerStyle: {
-    backgroundColor: "#008037",
-  },
-  headerTitleStyle: {
-    color: "#ffffff",
-    textAlign: "center",
-  },
+// style do stack Drawer
+const stackScreenDrawerOptions: StackNavigationOptions = {
+  headerShown: false,
 };
 
-// style da página Logger
-const stackScreenLoggerOptions = (): StackNavigationOptions => {
-  return {
-    ...stackScreenOptions,
-    title: "Cadastrar",
+// style da página CalculateEnergyConsumption
+const stackScreenCalculateEnergyConsumptionOptions =
+  (): StackNavigationOptions => {
+    return {
+      ...stackScreenOptions,
+      title: "Calcular Consumo de Energia",
+    };
   };
-};
 
-// style da página Login
-const stackScreenLoginOptions = (): StackNavigationOptions => {
-  return {
-    ...stackScreenOptions,
-    title: "Login",
-  };
-};
-
-// style dos inputs
-const inputTheme = {
-  ...DefaultTheme,
-  roundness: 15,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#008037",
-    secondary: "#ffffff",
-    text: "#000000",
-  },
+// style do stack EnergyConsumptionPages
+const stackScreenEnergyConsumptionPagesOptions: StackNavigationOptions = {
+  headerShown: false,
 };
 
 const styles = StyleSheet.create({
@@ -134,17 +136,28 @@ const styles = StyleSheet.create({
   },
 });
 
-export {
-  stackScreenAuthPagesOptions,
-  stackScreenDrawerOptions,
-  drawerNavigatorOptions,
-  drawerAuthorizedScreenOptions,
-  IconName,
+// style dos inputs
+const inputTheme = {
+  ...DefaultTheme,
+  roundness: 15,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#008037",
+    secondary: "#ffffff",
+    text: "#000000",
+  },
 };
 
 export {
+  stackScreenAuthPagesOptions,
   stackScreenLoggerOptions,
   stackScreenLoginOptions,
-  inputTheme,
+  IconName,
+  drawerNavigatorOptions,
+  drawerAuthorizedScreenOptions,
+  stackScreenDrawerOptions,
+  stackScreenCalculateEnergyConsumptionOptions,
+  stackScreenEnergyConsumptionPagesOptions,
   styles,
+  inputTheme,
 };

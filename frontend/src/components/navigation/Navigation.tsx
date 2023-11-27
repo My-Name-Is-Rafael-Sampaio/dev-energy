@@ -4,18 +4,25 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import CustomDrawer from "../custom-drawer/CustomDrawer";
-import { Logger, Login, Home } from "../../screens/Main";
+import {
+  Logger,
+  Login,
+  Home,
+  EnergyConsumption,
+  CalculateEnergyConsumption,
+} from "../../screens/Main";
 import { UserContext } from "../../contexts/Main";
-import { recoverData } from "../../util/Main";
 
 import {
-  drawerNavigatorOptions,
-  drawerAuthorizedScreenOptions,
-  stackScreenDrawerOptions,
   stackScreenAuthPagesOptions,
   stackScreenLoggerOptions,
   stackScreenLoginOptions,
   IconName,
+  drawerNavigatorOptions,
+  drawerAuthorizedScreenOptions,
+  stackScreenDrawerOptions,
+  stackScreenCalculateEnergyConsumptionOptions,
+  stackScreenEnergyConsumptionPagesOptions,
 } from "../css/GlobalStyles";
 
 type MenuOption = {
@@ -54,17 +61,24 @@ const DrawerPages = () => {
 
   const [menuOptions, setMenuOptions] = useState<MenuOption[]>([
     {
-      key: 0,
+      key: 1,
       name: "home",
       icon: "home-outline",
       title: "Home",
       component: Home,
     },
+    {
+      key: 2,
+      name: "energy-consumption",
+      icon: "calculator-outline",
+      title: "Consumo de Energia",
+      component: EnergyConsumption,
+    },
   ]);
 
   useEffect(() => {
     if (availableMenuOptions !== undefined && availableMenuOptions !== null) {
-      const arrayForced: number[] = [0];
+      const arrayForced: number[] = [1, 2];
       const filteredMenuOptions = menuOptions.filter((page) =>
         arrayForced.includes(page.key)
       );
@@ -100,6 +114,20 @@ const DrawerPages = () => {
   );
 };
 
+const EnergyConsumptionPages = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen
+          name="calculateEnergyConsumption"
+          component={CalculateEnergyConsumption}
+          options={stackScreenCalculateEnergyConsumptionOptions}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+};
+
 const Navigation = () => {
   const { isLoggedIn } = useContext(UserContext);
 
@@ -112,6 +140,11 @@ const Navigation = () => {
               name="drawerPages"
               component={DrawerPages}
               options={stackScreenDrawerOptions}
+            />
+            <Stack.Screen
+              name="energyConsumptionPages"
+              component={EnergyConsumptionPages}
+              options={stackScreenEnergyConsumptionPagesOptions}
             />
           </Stack.Group>
         ) : (
