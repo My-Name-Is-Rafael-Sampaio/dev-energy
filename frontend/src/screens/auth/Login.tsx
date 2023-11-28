@@ -4,12 +4,12 @@ import { View, Image, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { Text, TextInput, Button } from "react-native-paper";
 
 import { styles, inputTheme } from "../../components/Main";
-import { UserContext } from "../../contexts/Main";
+import { AppContext } from "../../contexts/Main";
 
 const Login = ({ navigation }) => {
-  const { setIsLoggedIn } = useContext(UserContext);
+  const { setUserIsLoggedIn } = useContext(AppContext);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
   const handleLoginButton = async () => {
     dismissKeyboard();
     setIsLoading(true);
-    setIsLoggedIn(true);
+    setUserIsLoggedIn(true);
   };
 
   const handleLoggerButton = () => {

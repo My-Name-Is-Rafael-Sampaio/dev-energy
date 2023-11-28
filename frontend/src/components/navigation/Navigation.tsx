@@ -11,7 +11,7 @@ import {
   EnergyConsumption,
   CalculateEnergyConsumption,
 } from "../../screens/Main";
-import { UserContext } from "../../contexts/Main";
+import { AppContext, UserContext } from "../../contexts/Main";
 
 import {
   stackScreenAuthPagesOptions,
@@ -129,12 +129,12 @@ const EnergyConsumptionPages = () => {
 };
 
 const Navigation = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { userIsLoggedIn } = useContext(AppContext);
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isLoggedIn ? (
+        {userIsLoggedIn ? (
           <Stack.Group>
             <Stack.Screen
               name="drawerPages"

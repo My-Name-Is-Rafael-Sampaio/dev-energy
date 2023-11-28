@@ -41,7 +41,11 @@ const EnergyConsumption = ({ navigation }) => {
             />
           </View>
           <View style={styles[3]}>
-            <Text style={{ textAlign: "center", fontSize: 20 }}>Indústria</Text>
+            <Text
+              style={{ textAlign: "center", fontSize: 20, fontWeight: "bold" }}
+            >
+              Indústria
+            </Text>
           </View>
         </View>
         <View style={styles[2]}>
@@ -55,7 +59,11 @@ const EnergyConsumption = ({ navigation }) => {
             />
           </View>
           <View style={styles[3]}>
-            <Text style={{ textAlign: "center", fontSize: 20 }}>Domicílio</Text>
+            <Text
+              style={{ textAlign: "center", fontSize: 20, fontWeight: "bold" }}
+            >
+              Domicílio
+            </Text>
           </View>
         </View>
       </View>

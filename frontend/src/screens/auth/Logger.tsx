@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { View, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
+import React, { useState } from "react";
+import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 
 import { TextInput, Button } from "react-native-paper";
 
 import { styles, inputTheme } from "../../components/Main";
 
 const Logger = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 

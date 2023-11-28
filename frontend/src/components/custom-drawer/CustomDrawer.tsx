@@ -7,17 +7,17 @@ import {
 
 import { Avatar, Text, Button } from "react-native-paper";
 
-import { UserContext } from "../../contexts/Main";
+import { AppContext } from "../../contexts/Main";
 import { styles } from "../css/GlobalStyles";
 
 const CustomDrawer = (props) => {
-  const { setIsLoggedIn } = useContext(UserContext);
+  const { setUserIsLoggedIn } = useContext(AppContext);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogoutButton = () => {
     setIsLoading(true);
-    setIsLoggedIn(false);
+    setUserIsLoggedIn(false);
   };
 
   return (
