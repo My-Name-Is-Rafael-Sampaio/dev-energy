@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import { View, ScrollView } from "react-native";
 
-import { Card, Avatar, Text, Button } from "react-native-paper";
+import { Card, Avatar, Text } from "react-native-paper";
 
 type CardType = {
   id: number;
   icon: string;
   title: string;
   subtitle: string;
+  content: string[];
   image: string;
 };
 
 const LeftContent = ({ icon, ...props }: { icon: string }) => (
   <Avatar.Icon {...props} icon={icon} />
 );
+
+const imagePaths = {
+  "lightning-bolt-outline": require("../../assets/lightning-bolt-outline.png"),
+  cat: require("../../assets/cat.jpg"),
+  "sine-wave": require("../../assets/sine-wave.jpg"),
+};
 
 const Home = ({ navigation }) => {
   const [cards, setCards] = useState<CardType[]>([
@@ -22,21 +29,36 @@ const Home = ({ navigation }) => {
       icon: "lightning-bolt-outline",
       title: "Economia de Energia",
       subtitle: "Maximize a Eficiência e Minimize o Consumo",
-      image: "https://picsum.photos/700",
+      content: [
+        "Aparelhos Eficientes: Escolha eletrodomésticos com alta classificação energética para diminuir o consumo de energia.",
+        "Lâmpadas LED: Troque por LEDs para economizar energia e prolongar a vida útil das lâmpadas.",
+        "Desligue em Standby: Desconectar dispositivos eletrônicos da tomada evita consumo desnecessário em standby.",
+      ],
+      image: "lightning-bolt-outline",
     },
     {
       id: 2,
       icon: "cat",
       title: "Gato de Luz (Roubo de Energia)",
       subtitle: "Consequências e Riscos do Roubo de Eletricidade",
-      image: "https://picsum.photos/700",
+      content: [
+        "Prática Ilegal: Roubo de energia é crime e pode resultar em multas e até prisão.",
+        "Riscos à Segurança: Conexões clandestinas representam riscos de curtos-circuitos e incêndios.",
+        "Impacto Social: Afeta os custos para consumidores honestos e prejudica investimentos na infraestrutura elétrica.",
+      ],
+      image: "cat",
     },
     {
       id: 3,
       icon: "sine-wave",
       title: "Alternativas e Soluções Legais",
       subtitle: "Para Dificuldades Financeiras",
-      image: "https://picsum.photos/700",
+      content: [
+        "Programas de Assistência: Procure programas de auxílio ou parcelamento oferecidos por empresas de energia.",
+        "Uso Responsável: Adote práticas conscientes para reduzir o consumo sem recorrer a métodos ilegais.",
+        "Energia Sustentável: Considere fontes alternativas, como energia solar, para reduzir dependência da rede elétrica convencional.",
+      ],
+      image: "sine-wave",
     },
   ]);
 
@@ -68,10 +90,13 @@ const Home = ({ navigation }) => {
                 subtitle={cardItem.subtitle}
               />
               <Card.Content>
-                <Text variant="titleLarge">Card title</Text>
-                <Text variant="bodyMedium">Card content</Text>
+                {cardItem.content.map((contentItem, index) => (
+                  <Text key={index} style={{ padding: 5 }}>
+                    {contentItem}
+                  </Text>
+                ))}
               </Card.Content>
-              <Card.Cover source={{ uri: cardItem.image }} />
+              <Card.Cover source={imagePaths[cardItem.image]} resizeMethod="auto" resizeMode="center" />
             </Card>
           </View>
         ))}
