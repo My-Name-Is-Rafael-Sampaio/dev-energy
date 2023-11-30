@@ -14,6 +14,8 @@ import {
   inputTheme,
 } from "./css/GlobalStyles";
 
+import Input from "./textInput/Input";
+
 export {
   stackScreenAuthPagesOptions,
   stackScreenLoggerOptions,
@@ -27,3 +29,5 @@ export {
   styles,
   inputTheme,
 };
+
+export { Input };

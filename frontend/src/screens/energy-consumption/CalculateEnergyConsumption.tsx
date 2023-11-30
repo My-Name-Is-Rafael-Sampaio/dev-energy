@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { stringSimilarity } from "string-similarity-js";
 
 import {
   Text,
@@ -12,11 +13,10 @@ import {
   List,
   Modal,
   Portal,
-  TextInput,
   Button,
 } from "react-native-paper";
 
-import { styles, inputTheme } from "../../components/Main";
+import { Input, styles } from "../../components/Main";
 
 type ItemType = {
   id: number;
@@ -24,6 +24,54 @@ type ItemType = {
   name: string;
   price: number;
   watts: number;
+};
+
+const formatValueToBRL = (value: number): string => {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};
+
+const iconMapping: { [key: string]: string } = {
+  amplificador: "amplifier",
+  "ar-condicionado": "air-conditioner",
+  cafeteira: "coffee-maker-outline",
+  "câmera de vigilância": "cctv",
+  "cortador de grama": "mower",
+  computador: "desktop-classic",
+  "filtro de ar": "air-filter",
+  geladeira: "fridge-outline",
+  impressora: "printer",
+  lâmpada: "ceiling-light-outline",
+  liquidificador: "blender-outline",
+  "micro-ondas": "microwave",
+  "purificador de ar": "air-purifier",
+  televisão: "television",
+  "umidificador de ar": "air-humidifier",
+  "ventilador de teto": "ceiling-fan",
+};
+
+const findMostSimilarKey = (input: string): string => {
+  let bestMatch = "";
+  let highestSimilarity = 0;
+
+  for (const key of Object.keys(iconMapping)) {
+    const currentSimilarity = stringSimilarity(
+      input.toLowerCase(),
+      key.toLowerCase()
+    );
+    if (currentSimilarity > highestSimilarity) {
+      highestSimilarity = currentSimilarity;
+      bestMatch = key;
+    }
+  }
+
+  if (highestSimilarity > 0.5) {
+    return bestMatch;
+  }
+
+  return input.toLowerCase();
 };
 
 const CalculateEnergyConsumption = () => {
@@ -42,13 +90,6 @@ const CalculateEnergyConsumption = () => {
   const [itemName, setItemName] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [itemWatts, setItemWatts] = useState("");
-
-  const formatValueToBRL = (value: number): string => {
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-  };
 
   const showModal = () => setModalVisibility(true);
 
@@ -75,9 +116,11 @@ const CalculateEnergyConsumption = () => {
   };
 
   const handleIncludeButton = () => {
+    const itemNameMatched = findMostSimilarKey(itemName);
+
     const newItem: ItemType = {
       id: items.length + 1,
-      icon: itemIcon,
+      icon: iconMapping[itemNameMatched],
       name: itemName,
       price: parseFloat(itemPrice),
       watts: parseInt(itemWatts),
@@ -136,43 +179,35 @@ const CalculateEnergyConsumption = () => {
               <View style={styles[1]}>
                 <View style={styles[2]}>
                   <View style={styles[3]}>
-                    <TextInput
-                      left={<TextInput.Icon icon="tag-outline" />}
+                    <Input
+                      icon="tag-outline"
                       label="Ícone"
-                      style={styles[4]}
-                      theme={inputTheme}
                       value={itemIcon}
-                      onChangeText={(text) => setItemIcon(text)}
+                      setValue={setItemIcon}
                     />
                   </View>
                   <View style={styles[3]}>
-                    <TextInput
-                      left={<TextInput.Icon icon="pencil-outline" />}
+                    <Input
+                      icon="pencil-outline"
                       label="Nome"
-                      style={styles[4]}
-                      theme={inputTheme}
                       value={itemName}
-                      onChangeText={(text) => setItemName(text)}
+                      setValue={setItemName}
                     />
                   </View>
                   <View style={styles[3]}>
-                    <TextInput
-                      left={<TextInput.Icon icon="cash" />}
+                    <Input
+                      icon="cash"
                       label="Preço"
-                      style={styles[4]}
-                      theme={inputTheme}
                       value={itemPrice}
-                      onChangeText={(text) => setItemPrice(text)}
+                      setValue={setItemPrice}
                     />
                   </View>
                   <View style={styles[3]}>
-                    <TextInput
-                      left={<TextInput.Icon icon="lightning-bolt-outline" />}
+                    <Input
+                      icon="lightning-bolt-outline"
                       label="Watts"
-                      style={styles[4]}
-                      theme={inputTheme}
                       value={itemWatts}
-                      onChangeText={(text) => setItemWatts(text)}
+                      setValue={setItemWatts}
                     />
                   </View>
                 </View>
@@ -206,7 +241,7 @@ const CalculateEnergyConsumption = () => {
           <IconButton icon="plus" size={20} onPress={showModal} />
         </View>
         <ScrollView overScrollMode="never" showsVerticalScrollIndicator={false}>
-          {items.reverse().map((item: ItemType, index) => (
+          {items.map((item: ItemType, index) => (
             <View key={index}>
               <List.Item
                 left={(props) => <List.Icon {...props} icon={item.icon} />}

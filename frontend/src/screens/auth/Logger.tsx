@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 
-import { TextInput, Button } from "react-native-paper";
+import { Button } from "react-native-paper";
 
-import { styles, inputTheme } from "../../components/Main";
+import { Input, styles } from "../../components/Main";
 
 const Logger = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,24 +24,20 @@ const Logger = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <View style={styles[1]}>
         <View style={styles[3]}>
-          <TextInput
-            left={<TextInput.Icon icon="account-outline" />}
+          <Input
+            icon="account-outline"
             label="Usuário"
-            style={styles[4]}
-            theme={inputTheme}
             value={userName}
-            onChangeText={(text) => setUserName(text)}
+            setValue={setUserName}
           />
         </View>
         <View style={styles[3]}>
-          <TextInput
-            left={<TextInput.Icon icon="lock-outline" />}
+          <Input
+            secureTextEntry={true}
+            icon="lock-outline"
             label="Senha"
-            secureTextEntry
-            style={styles[4]}
-            theme={inputTheme}
             value={password}
-            onChangeText={(text) => setPassword(text)}
+            setValue={setPassword}
           />
         </View>
         <View style={styles[2]}>
