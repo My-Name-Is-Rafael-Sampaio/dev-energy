@@ -32,22 +32,24 @@ Antes de começar, certifique-se de ter o Node.js instalado em sua máquina.
 
 1. Clone este repositório:
 
-- https://github.com/My-Name-Is-Rafael-Sampaio/pivete-energy.git
+-- https://github.com/My-Name-Is-Rafael-Sampaio/pivete-energy.git
 
 2. Instale as dependências:
 
-- cd nome-da-pasta
-- npm install
+-- cd nome-da-pasta
+-- npm install
 
 3. Inicie o projeto:
 
-- cd nome-da-pasta
-- npm start
-- npx expo start
+-- cd nome-da-pasta
+-- npm start
+-- npx expo start
 
 4. Utilize o Expo Go para rodar a aplicação em um dispositivo móvel ou em um emulador.
 
 ## Autores
 
-- [Nome do Autor 1](link-para-o-perfil-do-github)
-- [Nome do Autor 2](link-para-o-perfil-do-github)
+- [Filipe Asaf Mota Mendes](https://github.com/ImAsaaf)
+- [Gabriel Pamponet Carneiro](https://github.com/pomppss)
+- [Rafael Sampaio de Jesus](https://github.com/My-Name-Is-Rafael-Sampaio)
+- [Taciano Santos da Hora](https://github.com/taciodev)
