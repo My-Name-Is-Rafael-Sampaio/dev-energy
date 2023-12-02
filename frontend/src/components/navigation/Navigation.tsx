@@ -5,8 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import CustomDrawer from "../custom-drawer/CustomDrawer";
 import {
-  Logger,
-  Login,
+  SignUp,
+  SignIn,
   Home,
   EnergyConsumption,
   CalculateEnergyConsumption,
@@ -15,8 +15,8 @@ import { AppContext, UserContext } from "../../contexts/Main";
 
 import {
   stackScreenAuthPagesOptions,
-  stackScreenLoggerOptions,
-  stackScreenLoginOptions,
+  stackScreenSignUpOptions,
+  stackScreenSignInOptions,
   IconName,
   drawerNavigatorOptions,
   drawerAuthorizedScreenOptions,
@@ -39,17 +39,17 @@ const Stack = createStackNavigator();
 
 const AuthPages = () => {
   return (
-    <Stack.Navigator initialRouteName="login">
+    <Stack.Navigator initialRouteName="signIn">
       <Stack.Group>
         <Stack.Screen
-          name="logger"
-          component={Logger}
-          options={stackScreenLoggerOptions}
+          name="signUp"
+          component={SignUp}
+          options={stackScreenSignUpOptions}
         />
         <Stack.Screen
-          name="login"
-          component={Login}
-          options={stackScreenLoginOptions}
+          name="signIn"
+          component={SignIn}
+          options={stackScreenSignInOptions}
         />
       </Stack.Group>
     </Stack.Navigator>

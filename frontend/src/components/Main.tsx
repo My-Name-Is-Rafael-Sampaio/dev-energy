@@ -2,8 +2,8 @@ import React from "react";
 
 import {
   stackScreenAuthPagesOptions,
-  stackScreenLoggerOptions,
-  stackScreenLoginOptions,
+  stackScreenSignUpOptions,
+  stackScreenSignInOptions,
   IconName,
   drawerNavigatorOptions,
   drawerAuthorizedScreenOptions,
@@ -15,11 +15,12 @@ import {
 } from "./css/GlobalStyles";
 
 import Input from "./textInput/Input";
+import NotificationFooterBar from "./notification-footer-bar/NotificationFooterBar";
 
 export {
   stackScreenAuthPagesOptions,
-  stackScreenLoggerOptions,
-  stackScreenLoginOptions,
+  stackScreenSignUpOptions,
+  stackScreenSignInOptions,
   IconName,
   drawerNavigatorOptions,
   drawerAuthorizedScreenOptions,
@@ -30,4 +31,4 @@ export {
   inputTheme,
 };
 
-export { Input };
+export { Input, NotificationFooterBar };

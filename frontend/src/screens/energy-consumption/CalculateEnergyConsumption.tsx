@@ -4,6 +4,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import { stringSimilarity } from "string-similarity-js";
 
@@ -16,22 +17,24 @@ import {
   Button,
 } from "react-native-paper";
 
+import { includeDevice, loadDevicesByUser } from "../../services/Main";
+
 import { Input, styles } from "../../components/Main";
 
-type ItemType = {
-  id: number;
+type DeviceType = {
+  userId: string;
+  id: string;
   icon: string;
   name: string;
-  price: number;
-  watts: number;
+  powerConsumption: number;
 };
 
-const formatValueToBRL = (value: number): string => {
-  return value.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
-};
+// const formatValueToBRL = (value: number): string => {
+//   return value.toLocaleString("pt-BR", {
+//     style: "currency",
+//     currency: "BRL",
+//   });
+// };
 
 const iconMapping: { [key: string]: string } = {
   amplificador: "amplifier",
@@ -75,21 +78,66 @@ const findMostSimilarKey = (input: string): string => {
 };
 
 const CalculateEnergyConsumption = () => {
-  const [items, setItems] = useState<ItemType[]>([
-    {
-      id: 1,
-      icon: "fridge-outline",
-      name: "Geladeira",
-      price: 36590.0,
-      watts: 200,
-    },
-  ]);
+  const [devices, setDevices] = useState<DeviceType[]>([]);
   const [amountSpentMonthly, setAmountSpentMonthly] = useState<number>(0.0);
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
-  const [itemIcon, setItemIcon] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [itemPrice, setItemPrice] = useState("");
-  const [itemWatts, setItemWatts] = useState("");
+  const [deviceIcon, setDeviceIcon] = useState("");
+  const [deviceName, setDeviceName] = useState("");
+  const [devicePrice, setDevicePrice] = useState("");
+  const [devicePowerConsumption, setDevicePowerConsumption] = useState("");
+
+  const registerDevice = async (
+    userId: string,
+    deviceIcon: string,
+    deviceName: string,
+    powerConsumption: number
+  ) => {
+    try {
+      const response = await includeDevice(
+        userId,
+        deviceName,
+        powerConsumption
+      );
+      const payload = JSON.parse(response);
+
+      if (payload.status === 201) {
+        console.log("Dispositivo cadastrado com sucesso");
+      }
+    } catch (error) {
+      Alert.alert(
+        "Alerta!",
+        `${error}`,
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+    }
+  };
+
+  const getDevicesByUser = async () => {
+    try {
+      const response = await loadDevicesByUser(
+        "d9d9bc19-eb39-4ec3-99e0-23dbc4671eb2"
+      );
+      const payload = JSON.parse(response);
+
+      setDevices(payload);
+    } catch (error) {
+      Alert.alert(
+        "Alerta!",
+        `${error}`,
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+    }
+  };
 
   const showModal = () => setModalVisibility(true);
 
@@ -109,36 +157,67 @@ const CalculateEnergyConsumption = () => {
   };
 
   const clearFields = () => {
-    setItemIcon("");
-    setItemName("");
-    setItemPrice("");
-    setItemWatts("");
+    setDeviceIcon("");
+    setDeviceName("");
+    // setDevicePrice("");
+    setDevicePowerConsumption("");
   };
 
-  const handleIncludeButton = () => {
-    const itemNameMatched = findMostSimilarKey(itemName);
+  const handleIncludeDeviceButton = async (
+    deviceIcon: string,
+    deviceName: string,
+    devicePowerConsumption: number
+  ) => {
+    // const itemNameMatched = findMostSimilarKey(itemName);
+    // const newItem: ItemType = {
+    //   id: devices.length + 1,
+    //   icon: iconMapping[itemNameMatched],
+    //   name: itemName,
+    //   price: parseFloat(itemPrice),
+    //   watts: parseInt(itemWatts),
+    // };
+    // setDevices([...devices, newItem]);
+    // setModalVisibility(false);
+    // clearFields();
 
-    const newItem: ItemType = {
-      id: items.length + 1,
-      icon: iconMapping[itemNameMatched],
-      name: itemName,
-      price: parseFloat(itemPrice),
-      watts: parseInt(itemWatts),
-    };
+    if (!deviceIcon || !deviceName || !devicePowerConsumption) {
+      Alert.alert(
+        "Alerta!",
+        "Os dados estão incompletos. Preencha todos os campos.",
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: false }
+      );
+      return;
+    }
 
-    setItems([...items, newItem]);
-    setModalVisibility(false);
-    clearFields();
+    await registerDevice(
+      "d9d9bc19-eb39-4ec3-99e0-23dbc4671eb2",
+      deviceIcon,
+      deviceName,
+      devicePowerConsumption
+    );
   };
 
   useEffect(() => {
-    const totalSpent = items.reduce(
-      (acc, currentItem) => acc + currentItem.price,
-      0
-    );
+    const fectData = async () => {
+      await getDevicesByUser();
+    };
 
-    setAmountSpentMonthly(totalSpent);
-  }, [items]);
+    fectData();
+  }, []);
+
+  // useEffect(() => {
+  //   const totalSpent = devices.reduce(
+  //     (acc, currentItem) => acc + currentItem.price,
+  //     0
+  //   );
+
+  //   setAmountSpentMonthly(totalSpent);
+  // }, [devices]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -162,7 +241,8 @@ const CalculateEnergyConsumption = () => {
                   fontWeight: "bold",
                 }}
               >
-                {formatValueToBRL(amountSpentMonthly)}
+                {/* {formatValueToBRL(amountSpentMonthly)} */}
+                R$
               </Text>
             </View>
           </View>
@@ -182,32 +262,32 @@ const CalculateEnergyConsumption = () => {
                     <Input
                       icon="tag-outline"
                       label="Ícone"
-                      value={itemIcon}
-                      setValue={setItemIcon}
+                      value={deviceIcon}
+                      setValue={setDeviceIcon}
                     />
                   </View>
                   <View style={styles[3]}>
                     <Input
                       icon="pencil-outline"
                       label="Nome"
-                      value={itemName}
-                      setValue={setItemName}
+                      value={deviceName}
+                      setValue={setDeviceName}
                     />
                   </View>
-                  <View style={styles[3]}>
+                  {/* <View style={styles[3]}>
                     <Input
                       icon="cash"
                       label="Preço"
                       value={itemPrice}
                       setValue={setItemPrice}
                     />
-                  </View>
+                  </View> */}
                   <View style={styles[3]}>
                     <Input
                       icon="lightning-bolt-outline"
                       label="Watts"
-                      value={itemWatts}
-                      setValue={setItemWatts}
+                      value={devicePowerConsumption}
+                      setValue={setDevicePowerConsumption}
                     />
                   </View>
                 </View>
@@ -219,7 +299,13 @@ const CalculateEnergyConsumption = () => {
                       buttonColor="#008037"
                       labelStyle={{ color: "#ffffff" }}
                       style={[styles[5]]}
-                      onPress={handleIncludeButton}
+                      onPress={async () =>
+                        await handleIncludeDeviceButton(
+                          deviceIcon,
+                          deviceName,
+                          parseInt(devicePowerConsumption)
+                        )
+                      }
                     >
                       Incluir
                     </Button>
@@ -241,7 +327,7 @@ const CalculateEnergyConsumption = () => {
           <IconButton icon="plus" size={20} onPress={showModal} />
         </View>
         <ScrollView overScrollMode="never" showsVerticalScrollIndicator={false}>
-          {items.map((item: ItemType, index) => (
+          {devices.map((item: DeviceType, index) => (
             <View key={index}>
               <List.Item
                 left={(props) => <List.Icon {...props} icon={item.icon} />}
@@ -251,8 +337,8 @@ const CalculateEnergyConsumption = () => {
                     {...props}
                     style={{ flexDirection: "column", alignItems: "center" }}
                   >
-                    <Text {...props}>{formatValueToBRL(item.price)}</Text>
-                    <Text {...props}>{`${item.watts}W`}</Text>
+                    {/* <Text {...props}>{formatValueToBRL(item.price)}</Text>
+                    <Text {...props}>{`${item.watts}W`}</Text> */}
                   </View>
                 )}
               />

@@ -2,12 +2,12 @@ import React, { createContext, useState, ReactNode } from "react";
 
 type UserContextType = {
   token: string | null;
-  userId: number | null;
+  userId: string | null;
   userEmail: string | null;
   userName: string | null;
   availableMenuOptions: number[] | null;
   setToken: (newState: string | null) => void;
-  setUserId: (newState: number | null) => void;
+  setUserId: (newState: string | null) => void;
   setUserEmail: (newState: string | null) => void;
   setUserName: (newState: string | null) => void;
   setAvailableMenuOptions: (newState: number[] | null) => void;
@@ -34,7 +34,7 @@ const UserContext = createContext<UserContextType>(initialValue);
 
 const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [token, setToken] = useState<string | null>(initialValue.token);
-  const [userId, setUserId] = useState<number | null>(initialValue.userId);
+  const [userId, setUserId] = useState<string | null>(initialValue.userId);
   const [userEmail, setUserEmail] = useState<string | null>(
     initialValue.userEmail
   );

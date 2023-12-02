@@ -19,16 +19,16 @@ const stackScreenOptions: StackNavigationOptions = {
   },
 };
 
-// style da página Logger
-const stackScreenLoggerOptions = (): StackNavigationOptions => {
+// style da página SignUp
+const stackScreenSignUpOptions = (): StackNavigationOptions => {
   return {
     ...stackScreenOptions,
     title: "Cadastrar",
   };
 };
 
-// style da página Login
-const stackScreenLoginOptions = (): StackNavigationOptions => {
+// style da página SignIn
+const stackScreenSignInOptions = (): StackNavigationOptions => {
   return {
     ...stackScreenOptions,
     title: "Login",
@@ -150,8 +150,8 @@ const inputTheme = {
 
 export {
   stackScreenAuthPagesOptions,
-  stackScreenLoggerOptions,
-  stackScreenLoginOptions,
+  stackScreenSignUpOptions,
+  stackScreenSignInOptions,
   IconName,
   drawerNavigatorOptions,
   drawerAuthorizedScreenOptions,
