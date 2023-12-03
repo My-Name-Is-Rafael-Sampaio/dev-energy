@@ -8,8 +8,8 @@ export class ElectronicDevicesUseCase {
     this.electronicDeviceRepository = new PrismaElectronicDevicesRepository();
   }
 
-  async create({ name, powerConsumption, userId }: Prisma.ElectronicDeviceUncheckedCreateInput) {
-    const electronicDevice = await this.electronicDeviceRepository.create({ name, powerConsumption, userId });
+  async create({ icon, name, powerConsumption, consumptionTime, userId }: Prisma.ElectronicDeviceUncheckedCreateInput) {
+    const electronicDevice = await this.electronicDeviceRepository.create({ icon, name, powerConsumption, consumptionTime, userId });
     return electronicDevice;
   }
 

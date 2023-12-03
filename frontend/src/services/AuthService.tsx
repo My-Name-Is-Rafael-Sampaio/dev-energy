@@ -34,7 +34,7 @@ const signUp = async (
 const signIn = async (userEmail: string, userPassword: string) => {
   try {
     const response = await axios.post(
-      `${baseUrl}/sessions`,
+      `${baseUrl}/signin`,
       {
         email: userEmail,
         password: userPassword,

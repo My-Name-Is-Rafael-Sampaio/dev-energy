@@ -10,7 +10,7 @@ import { Input, NotificationFooterBar, styles } from "../../components/Main";
 
 const SignIn = ({ navigation }) => {
   const { setUserIsLoggedIn } = useContext(AppContext);
-  const { setUserId } = useContext(UserContext);
+  const { setUserId, setUserName } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState("");
@@ -38,6 +38,7 @@ const SignIn = ({ navigation }) => {
 
       if (payload.status !== 500 && payload.status !== 400) {
         setUserId(payload.data.sessions);
+        setUserName(payload.data.name);
         setUserIsLoggedIn(true);
       } else {
         setNotificationFooterBarMessage("Credenciais Inválidas.");

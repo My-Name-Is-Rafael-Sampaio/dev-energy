@@ -3,6 +3,6 @@ import { create } from "./create.controller";
 import { authenticate } from "./authenticate.controller";
 
 export async function usersRoutes(app: FastifyInstance) {
-  app.post("/signup", create);
-  app.post("/sessions", authenticate);
+  app.post("/users", create);
+  app.post("/signin", authenticate);
 }

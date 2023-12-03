@@ -8,17 +8,19 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   })
   
   const createBodySchema = z.object({
+    icon: z.string(),
     name: z.string(),
     powerConsumption: z.number(),
+    consumptionTime: z.number(),
   });
 
   const { userId } = createElectronicDeviceParamsSchema.parse(request.params)
-  const { name, powerConsumption } = createBodySchema.parse(request.body);
+  const { icon, name, powerConsumption, consumptionTime } = createBodySchema.parse(request.body);
 
   try {
       const electronicDevicesUseCase = new ElectronicDevicesUseCase();
 
-      await electronicDevicesUseCase.create({ name, powerConsumption, userId  });
+      await electronicDevicesUseCase.create({ icon, name, powerConsumption, consumptionTime, userId  });
   } catch(err) {
       return reply.status(400).send({ message: err });
   }

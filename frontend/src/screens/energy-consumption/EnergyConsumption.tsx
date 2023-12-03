@@ -6,18 +6,21 @@ import { Text, IconButton } from "react-native-paper";
 import { styles } from "../../components/Main";
 
 const EnergyConsumption = ({ navigation }) => {
-  const navigateTo = () => {
+  const navigateTo = (rateType: number) => {
     navigation.navigate("energyConsumptionPages", {
       screen: "calculateEnergyConsumption",
+      params: {
+        rateType: rateType,
+      },
     });
   };
 
   const handleFactoryIconButton = () => {
-    navigateTo();
+    navigateTo(1);
   };
 
   const handleHomeIconButton = () => {
-    navigateTo();
+    navigateTo(2);
   };
 
   return (

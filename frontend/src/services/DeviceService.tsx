@@ -5,15 +5,19 @@ const baseUrl = "http://192.168.100.94:3333";
 
 const includeDevice = async (
   userId: string,
+  deviceIcon: string,
   deviceName: string,
-  powerConsumption: number
+  powerConsumption: number,
+  consumptionTime: number
 ) => {
   try {
     const response = await axios.post(
       `${baseUrl}/electronics/${userId}`,
       {
+        icon: deviceIcon,
         name: deviceName,
         powerConsumption: powerConsumption,
+        consumptionTime: consumptionTime,
       },
       {
         headers: {
@@ -37,9 +41,6 @@ const loadDevicesByUser = async (userId: string) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      // params: {
-      //   userId: userId,
-      // },
     });
 
     return JSON.stringify(response.data);

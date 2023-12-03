@@ -22,7 +22,7 @@ export async function authenticate(
       password,
     });
 
-    return reply.status(200).send({ sessions: user.id });
+    return reply.status(200).send({ sessions: user.id, name: user.name });
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       return reply.status(400).send({ message: err.message });
