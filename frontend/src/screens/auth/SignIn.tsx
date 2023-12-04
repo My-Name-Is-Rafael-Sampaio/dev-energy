@@ -81,7 +81,7 @@ const SignIn = ({ navigation }) => {
                   padding: 5,
                 }}
               >
-                Bem-vindo ao Pivete Energy
+                Bem-vindo ao DEV Energy
               </Text>
             </View>
           </View>

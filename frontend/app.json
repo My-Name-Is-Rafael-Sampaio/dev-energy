@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Pivete Energy",
-    "slug": "pivete-energy",
+    "name": "DEV Energy",
+    "slug": "dev-energy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
