@@ -1,53 +1,113 @@
-# Projeto de Programação Orientada a Objetos em React Native
+# Dev Energy
 
-Este projeto foi desenvolvido como parte do curso de Ciência da Programação, com foco na aplicação dos conceitos de Programação Orientada a Objetos (POO) em um aplicativo React Native gerenciado pelo Expo.
+Este projeto é a materialização dos conhecimentos adquiridos durante o curso de Ciência da Programação, onde exploramos de maneira aprofundada a aplicação dos princípios fundamentais da Programação Orientada a Objetos (POO) em um inovador aplicativo mobile.
 
-## Descrição
+## Tecnologias Principais
 
-O objetivo deste projeto era criar uma aplicação móvel utilizando React Native e Expo, aplicando os princípios da Programação Orientada a Objetos para desenvolver uma solução funcional.
+- **Frontend:**
 
-O projeto abrange conceitos-chave da POO, como encapsulamento, herança, polimorfismo, abstração, entre outros, para criar uma estrutura de código robusta e modular.
+  - React Native
+  - Expo
+  - JavaScript/TypeScript
 
-## Tecnologias Utilizadas
+- **Backend:**
 
-- React Native
-- Expo
-- JavaScript/TypeScript
+  - Node.js
 
-## Funcionalidades
+- **Banco de Dados:**
+  - Docker
+  - Docker Compose
 
-A aplicação desenvolvida inclui as seguintes funcionalidades:
+## Funcionalidades Destacadas
 
-- [Funcionalidade 1]
-- [Funcionalidade 2]
-- [Funcionalidade 3]
+O aplicativo desenvolvido apresenta uma variedade de funcionalidades, cuidadosamente projetadas para proporcionar uma experiência única, incluindo:
 
-## Instruções de Uso
+1. **Estimativa de Conta de Luz:**
 
-### Pré-requisitos
+   - **Descrição:** Nosso aplicativo realiza uma estimativa da conta de luz do usuário ao final do mês.
+   - **Funcionalidade:** Após o cadastro dos aparelhos eletrônicos presentes na casa, o aplicativo realiza cálculos precisos para oferecer uma estimativa confiável da conta de luz.
 
-Antes de começar, certifique-se de ter o Node.js instalado em sua máquina.
+2. **Cadastro Simplificado de Aparelhos Eletrônicos:**
 
-### Como executar o projeto
+   - **Descrição:** Facilitamos o processo de entrada de dados. O usuário apenas precisa realizar o cadastro dos aparelhos eletrônicos presentes em sua residência.
+   - **Funcionalidade:** Uma interface intuitiva permite ao usuário adicionar, editar ou remover dispositivos, tornando o cadastro rápido e acessível.
 
-1. Clone este repositório:
+## Guia de Utilização
 
-   ° https://github.com/My-Name-Is-Rafael-Sampaio/dev-energy.git
+### Frontend (React Native)
+
+#### Pré-requisitos
+
+Certifique-se de ter o Node.js instalado em sua máquina antes de iniciar.
+
+#### Executando o Projeto
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/My-Name-Is-Rafael-Sampaio/dev-energy.git
+   ```
 
 2. Instale as dependências:
 
-   ° cd nome-da-pasta
-   ° npm install
+   ```bash
+   cd nome-da-pasta
+   npm install
+   ```
 
 3. Inicie o projeto:
 
-   ° cd nome-da-pasta
-   ° npm start
-   ° npx expo start
+   ```bash
+   npx expo start
+   ```
 
-4. Utilize o Expo Go para rodar a aplicação em um dispositivo móvel ou em um emulador.
+4. Utilize o Expo Go para executar a aplicação em um dispositivo móvel ou em um emulador.
 
-## Autores
+### Backend (Node.js)
+
+#### Pré-requisitos
+
+Certifique-se de ter o Node.js instalado em sua máquina.
+
+#### Inicializando o Backend
+
+1. Navegue até o diretório do backend:
+
+   ```bash
+   cd backend
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicie o backend:
+
+   ```bash
+   npm run start:dev
+   ```
+
+Certifique-se de ajustar as configurações conforme necessário.
+
+### Banco de Dados (Docker e Docker Compose)
+
+#### Pré-requisitos
+
+Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
+
+#### Inicializando o Banco de Dados
+
+1. Execute o seguinte comando:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+Isso iniciará o banco de dados em um contêiner Docker separado.
+
+## Contribuidores
 
 - [Filipe Asaf Mota Mendes](https://github.com/ImAsaaf)
 - [Gabriel Pamponet Carneiro](https://github.com/pomppss)
