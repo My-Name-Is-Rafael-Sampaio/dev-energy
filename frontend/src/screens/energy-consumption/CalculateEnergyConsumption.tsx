@@ -254,7 +254,7 @@ const CalculateEnergyConsumption = ({ route }) => {
         const consumptionTime = deviceItem.consumptionTime;
 
         calculateTotalConsumptionValue(
-          parseFloat(rateType),
+          parseInt(rateType),
           powerConsumption,
           consumptionTime
         );
@@ -352,7 +352,7 @@ const CalculateEnergyConsumption = ({ route }) => {
                         await handleIncludeDeviceButton(
                           deviceIcon,
                           deviceName,
-                          parseFloat(devicePowerConsumption),
+                          parseInt(devicePowerConsumption),
                           parseFloat(consumptionTime)
                         )
                       }
