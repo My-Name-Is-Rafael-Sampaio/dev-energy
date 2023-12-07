@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const baseUrl = "http://192.168.100.94:3333";
+const baseUrl = "http://localhost:3333";
 
 const includeDevice = async (
   userId: string,
